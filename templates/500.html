@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{%  import 'macros.html' as macros %}
+{% block title %}{{ super() }}Error Interno 500{% endblock %}
+
+{% block content %}
+<h1 id='er5'>Lo sentimos :( Tenemos un error Interno</h1>
+<h2>Estamos trabajando para solucionarlo</h2>      
+<h3>{{ error }}</h3>
+   
+{% endblock %}
