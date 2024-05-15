@@ -1,9 +1,13 @@
 from flask import Flask, request, make_response, redirect, render_template
 from dotenv import load_dotenv
+from flask_bootstrap import Bootstrap
 
 load_dotenv()
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
+
+
 
 todos = ['Comprar café', 'Enviar solicitud de compra', 'Entregar vídeo al productor']
 
