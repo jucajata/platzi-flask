@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, redirect, render_template
+from flask import Flask, request, make_response, redirect, render_template, session
 from dotenv import load_dotenv
 from flask_bootstrap import Bootstrap
 
@@ -7,7 +7,7 @@ load_dotenv()
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 
-
+app.config['SECRET_KEY'] = 'SUPER SECRETO'
 
 todos = ['Comprar café', 'Enviar solicitud de compra', 'Entregar vídeo al productor']
 
@@ -24,7 +24,7 @@ def internal_server_error(error):
 def index():
     user_ip = request.remote_addr
     response = make_response(redirect('/hello'))
-    response.set_cookie('user_ip', user_ip)
+    session['user_ip'] = user_ip
     return response
 
 @app.route('/server_error')
@@ -34,7 +34,7 @@ def server_error():
 
 @app.route('/hello')
 def hello():
-    user_ip = request.cookies.get('user_ip')
+    user_ip = session.get('user_ip')
     context = {
         'user_ip':user_ip, 
         'todos':todos
